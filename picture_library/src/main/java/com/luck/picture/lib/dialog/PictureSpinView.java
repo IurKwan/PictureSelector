@@ -21,9 +21,11 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+import androidx.appcompat.widget.AppCompatImageView;
+
 import com.luck.picture.lib.R;
 
-public class PictureSpinView extends ImageView implements PictureIndeterminate {
+public class PictureSpinView extends AppCompatImageView implements PictureIndeterminate {
 
     private float mRotateDegrees;
     private int mFrameTime;

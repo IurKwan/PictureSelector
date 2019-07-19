@@ -16,8 +16,8 @@ group = "com.iur"
 
 
 bintray {
-    user = isHasFile ? properties.getProperty("bintray.user") : System.getenv("bintray_user")
-    key = isHasFile ? properties.getProperty("bintray.apikey") : System.getenv("bintray_apikey")
+    user = 'a729900963'
+    key = '816ba8378cade5abe8ce01bb3d19125b7255b9ad'
 
     pkg {
         repo = 'maven'
