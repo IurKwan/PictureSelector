@@ -1,23 +1,19 @@
-apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
-
-Properties properties = new Properties()
-boolean isHasFile = false
-if (project.rootProject.findProject('local.properties') != null){
-    isHasFile = true
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-}
+apply plugin: 'com.jfrog.bintray'
 
 def gitUrl = 'https://github.com/IurKwan/PictureSelector.git'   // Git仓库的url
 def siteUrl = 'https://github.com/IurKwan/PictureSelector'   // 项目的主页
 
-version = rootProject.ext.cfgs["versionName"]
+version = "3.0.0"
 group = "com.iur"
 
-
+Properties properties = new Properties()
+// 加载本地配置
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 bintray {
     user = 'a729900963'
     key = '816ba8378cade5abe8ce01bb3d19125b7255b9ad'
+    configurations = ['archives']
 
     pkg {
         repo = 'maven'
@@ -26,16 +22,7 @@ bintray {
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         publish = true // 是否是公开项目。
-
-        version {
-            name = rootProject.ext.cfgs["versionName"]
-            desc = 'pick image'
-            released = new Date()
-            vcsTag = 'v' + rootProject.ext.cfgs["versionName"]
-            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
-        }
     }
-    configurations = ['archives']
 }
 
 
@@ -72,6 +59,18 @@ install {
             }
         }
     }
+}
+
+task androidJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+}
+task androidJavadocsJar(type: Jar) {
+    classifier = 'javadoc'
+    from androidJavadocs.destinationDir
+}
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
 }
 
 task sourcesJar(type: Jar) {

@@ -24,6 +24,11 @@ allprojects {
     }
 }
 
+//最好加上全局编码设置
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
